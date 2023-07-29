@@ -1,0 +1,54 @@
+﻿@model List<To_Do.Models.TaskItem>
+@{
+    ViewData["Title"] = "Tasks List";
+}
+<h2>To-Do List</h2>
+
+<!-- Add task form -->
+<form asp-controller="Tasks" asp-action="Add" method="post" class="mb-3">
+    <div class="input-group">
+        <input type="text" name="Title" required class="form-control" placeholder="Enter task title..." />
+        <button type="submit" class="btn btn-primary">Add Task</button>
+    </div>
+</form>
+
+<!-- Delete all btn  -->
+<form asp-controller="Tasks" asp-action="DeleteAll" method="post">
+    <button type="submit" class="btn btn-danger mb-3">Delete AllTasks</button>
+</form>
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var task in Model)
+            {
+                <tr>
+                    <td>
+                        <label class="form-check-label">
+                            <input type="checkbox" class="form-check-input" name="completed" onclick="toggleComplete(this);" />
+                            @task.Title
+                        </label>
+                    </td>
+                    <td>
+                        <!-- Delete button -->
+                        <form asp-controller="Tasks" asp-action="Delete" method="post" class="d-inline">
+                            <input type="hidden" name="Id" value="@task.Id" />
+                            <button type="submit" class="btn btn-sm btn-danger">
+                                <span class="bi bi-trash"></span>
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<script src="~/js/site.js"></script>
+
