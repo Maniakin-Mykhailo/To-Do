@@ -30,3 +30,13 @@ body {
 .completed {
     text-decoration: line-through;
 }
+
+.custom-list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+    .custom-list-item label {
+        flex-grow: 1; /* Растягиваем label для занятия всего доступного пространства */
+    }

@@ -17,37 +17,28 @@
     <button type="submit" class="btn btn-danger mb-3">Delete AllTasks</button>
 </form>
 
-<div class="table-responsive">
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Title</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
+<div class="d-flex justify-content-center">
+    <div class="card" style="width: 36rem;">
+        <ul class="list-group list-group-flush">
             @foreach (var task in Model)
             {
-                <tr>
-                    <td>
-                        <label class="form-check-label">
-                            <input type="checkbox" class="form-check-input" name="completed" onclick="toggleComplete(this);" />
-                            @task.Title
-                        </label>
-                    </td>
-                    <td>
-                        <!-- Delete button -->
-                        <form asp-controller="Tasks" asp-action="Delete" method="post" class="d-inline">
-                            <input type="hidden" name="Id" value="@task.Id" />
-                            <button type="submit" class="btn btn-sm btn-danger">
-                                <span class="bi bi-trash"></span>
-                            </button>
-                        </form>
-                    </td>
-                </tr>
+                <li class="list-group-item custom-list-item">
+                    <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" name="completed" onclick="toggleComplete(this);" />
+                        @task.Title
+                    </label>
+
+                    <!-- Delete button -->
+                    <form asp-controller="Tasks" asp-action="Delete" method="post" class="d-inline">
+                        <input type="hidden" name="Id" value="@task.Id" />
+                        <button type="submit" class="btn btn-sm btn-danger">
+                            <span class="bi bi-trash"></span>
+                        </button>
+                    </form>
+                </li>
             }
-        </tbody>
-    </table>
+        </ul>
+    </div>
 </div>
 
 <script src="~/js/site.js"></script>

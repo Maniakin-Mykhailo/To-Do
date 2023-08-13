@@ -18,7 +18,13 @@ public class TasksController : Controller
         return View(tasks);
     }
 
+
+    /// <summary>
+    /// Add new task
+    /// </summary>
+    /// <returns>return RedirectToAction("Index");</returns>
     [HttpPost]
+    [ValidateAntiForgeryToken]
     public IActionResult Add(TaskItem task)
     {
         if (ModelState.IsValid)
@@ -29,7 +35,12 @@ public class TasksController : Controller
         return RedirectToAction("Index");
     }
 
+    /// <summary>
+    /// Delete chosen task
+    /// </summary>
+    /// <returns>return RedirectToAction("Index");</returns>
     [HttpPost]
+    [ValidateAntiForgeryToken]
     public IActionResult Delete(int id)
     {
         var task = _context.Tasks.Find(id);
@@ -42,7 +53,12 @@ public class TasksController : Controller
         return RedirectToAction("Index");
     }
 
+    /// <summary>
+    /// Delete all
+    /// </summary>
+    /// <returns>return RedirectToAction("Index");</returns>
     [HttpPost]
+    [ValidateAntiForgeryToken]
     public IActionResult DeleteAll()
     {
         var completedTasks = _context.Tasks.ToList();
